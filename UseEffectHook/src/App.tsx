@@ -28,7 +28,7 @@ function App() {
       }
     };
     fetchingdata();
-  }, []);
+  }, [count]);
 
   return (
     <div className="container">
