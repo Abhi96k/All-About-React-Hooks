@@ -17,10 +17,7 @@ function Search({ onChange }: SearchProps) {
 
 export default memo(Search);
 
-
 //memo hook
 // memo is used to optimize functional components by preventing unnecessary re-renders.
 // memo is render the component only when its props change.
 // This can improve performance in certain situations, especially when dealing with large lists or complex components.
-
-
