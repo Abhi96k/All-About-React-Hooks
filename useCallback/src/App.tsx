@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useCallback, useState } from "react";
+import "./App.css";
+import { user as allUsers } from "./user.constant";
+import Search from "./Search";
+import { shuffle } from "./utils";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [users, setUsers] = useState(allUsers);
+
+  const handleSearch = useCallback((text: string) => {
+    console.log(users[0]);
+
+    const filteredUsers = allUsers.filter((user) => user.includes(text));
+    setUsers(filteredUsers);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="tutorial">
+      <div className="align-center mb-2 flex">
+        <button onClick={() => setUsers(shuffle(allUsers))}>Shuffle</button>
+
+        <Search onChange={handleSearch} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <ul>
+        {users.map((user) => (
+          <li key={user}>{user}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default App
+export default App;
+
+//without useCallback  problem:-
+// every time the parent component re-renders, the handleSearch function is recreated.
+// this causes the Search component to re-render as well, even if its props haven't changed.(memo is used to optimize functional components by preventing unnecessary re-renders.)
+
+// To fix this, we can use the useCallback hook to memoize the handleSearch function.
+// useCallback:-
+// The useCallback hook returns a memoized version of the callback that only changes if one of the dependencies has changed.
