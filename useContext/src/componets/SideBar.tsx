@@ -1,8 +1,7 @@
-import DashboardContext from "../Context";
-import { useContext } from "react";
+import { useDashboardContext } from "../Context";
 
 export default function SideBar() {
-  const { user } = useContext(DashboardContext);
+  const { user } = useDashboardContext();
 
   return (
     <div className="sidebar">

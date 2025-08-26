@@ -1,8 +1,8 @@
-import DashboardContext from "../Context";
-import { useContext, useState } from "react";
+import { useDashboardContext } from "../Context";
+import { useState } from "react";
 
 export default function Profile() {
-  const { user, toggleSubscription, updateName } = useContext(DashboardContext);
+  const { user, toggleSubscription, updateName } = useDashboardContext();
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(user.name);
 

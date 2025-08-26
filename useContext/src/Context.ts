@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import type { User } from "./App";
 
 // Define the context value type
@@ -8,19 +8,17 @@ export interface DashboardContextValue {
   updateName: (newName: string) => void;
 }
 
-// Provide a default value to avoid undefined checks
-const defaultContextValue: DashboardContextValue = {
-  user: {
-    isSubscribed: false,
-    name: "Guest",
-    email: "guest@example.com",
-    avatar: "👤",
-  },
-  toggleSubscription: () => {},
-  updateName: () => {},
-};
+// Create context with undefined as initial value
+const DashboardContext = createContext<DashboardContextValue | undefined>(undefined);
 
-const DashboardContext = createContext<DashboardContextValue>(defaultContextValue);
+// Custom hook with proper error handling
+export const useDashboardContext = () => {
+  const context = useContext(DashboardContext);
+  if (!context) {
+    throw new Error("useDashboardContext must be used within a DashboardContextProvider");
+  }
+  return context;
+};
 
 export default DashboardContext;
  
