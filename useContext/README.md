@@ -167,3 +167,5 @@ const { user, toggleSubscription, updateName } = useContext(DashboardContext);
 - **Error Boundaries**: Error handling in React
 
 This example provides a solid foundation for understanding React Context and the useContext hook. Experiment with the code, add new features, and explore how context can solve real-world state management challenges!
+
+image.png
