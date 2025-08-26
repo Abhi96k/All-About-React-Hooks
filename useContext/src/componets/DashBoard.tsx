@@ -1,17 +1,17 @@
-import type { User } from "../App";
 import SideBar from "./SideBar";
 import Profile from "./Profile";
 
-interface DashboardProp {
-  user: User;
-}
-
-export default function Dashboard({ user }: DashboardProp) {
+export default function Dashboard() {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <Profile user={user} />
-      <SideBar user={user} />
+    <div className="dashboard">
+      <div className="dashboard-container">
+        <div className="main-content">
+          <Profile />
+        </div>
+        <div className="sidebar-container">
+          <SideBar />
+        </div>
+      </div>
     </div>
   );
 }
