@@ -7,13 +7,13 @@ const TimerExample = () => {
   const [elapsedTime, setElapsedTime] = useState(0);
 
   // Refs for timer management
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
+  const timeoutRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(0);
   const previousElapsedTimeRef = useRef<number>(0);
 
   // Ref for storing the latest callback function
-  const latestCallbackRef = useRef<() => void>();
+  const latestCallbackRef = useRef<() => void>(() => {});
 
   // Ref for storing cleanup functions
   const cleanupRef = useRef<(() => void) | null>(null);
